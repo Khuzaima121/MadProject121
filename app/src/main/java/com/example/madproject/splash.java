@@ -9,11 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,67 +26,63 @@ public class splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_splash);
 
-
-
         init();
-        if(user!=null&&user.isEmailVerified())
-        {
 
-           MoveToHome();
+        // Check if user is authenticated and email is verified
+        if (user != null && user.isEmailVerified()) {
+            moveToHome();
+        } else {
+            moveToMain();
         }
-        else {
-            MoveToMain();
-        }
-
-
-
-
-
-
     }
 
-    private void MoveToHome()
-    {
+    private void moveToHome() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i=new Intent(splash.this,Home.class);
+                Intent i = new Intent(splash.this, Home.class);
                 startActivity(i);
                 finish();
             }
-        },2000);
+        }, 2000);
     }
-    private void MoveToMain()
-    {
+
+    private void moveToMain() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i=new Intent(splash.this,MainActivity.class);
+                Intent i = new Intent(splash.this, MainActivity.class);
                 startActivity(i);
                 finish();
             }
-        },2000);
+        }, 2000);
     }
 
-    private void init()
-    {
-        tvslogan=findViewById(R.id.tvslogan);
-        ivlogo=findViewById(R.id.ivlogo);
-        Animation slogan_anim= AnimationUtils.loadAnimation(this,R.anim.slogan_animation);
-        Animation logo_anim= AnimationUtils.loadAnimation(this,R.anim.logo_animation);
-        ivlogo.setAnimation(logo_anim);
-        tvslogan.setAnimation(slogan_anim);
+    private void init() {
+        tvslogan = findViewById(R.id.tvslogan);
+        ivlogo = findViewById(R.id.ivlogo);
+        Objects.requireNonNull(getSupportActionBar()).hide();
+        // Set animations
+        Animation sloganAnim = AnimationUtils.loadAnimation(this, R.anim.slogan_animation);
+        Animation logoAnim = AnimationUtils.loadAnimation(this, R.anim.logo_animation);
+        ivlogo.setAnimation(logoAnim);
+        tvslogan.setAnimation(sloganAnim);
+
+        // Full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+
+        // Hide action bar
 
 
-        mAuth=FirebaseAuth.getInstance();
-        user=mAuth.getCurrentUser();
+        // Initialize Firebase
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
     }
+
 
 
 

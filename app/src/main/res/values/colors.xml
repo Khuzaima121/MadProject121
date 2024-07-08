@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="semi_transparent">#000000</color>
+    <color name="fab_color">#953111</color>
+    <color name="your_border_color">#FFFFFFFF</color>
 </resources>

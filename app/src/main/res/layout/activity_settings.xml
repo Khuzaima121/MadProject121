@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <Switch
+        android:id="@+id/switchNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Notifications" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dietary Restrictions"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextDietaryRestrictions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter any dietary restrictions" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Settings"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/buttons_background"
+        android:onClick="onSaveSettingsClick"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+
+</LinearLayout>

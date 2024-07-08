@@ -17,11 +17,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 public class CatagoriesAdapter extends FirebaseRecyclerAdapter<model_catagories, CatagoriesAdapter.adapterViewHolder> {
 
-    private Context context;
+    private final Context context;
 
     public CatagoriesAdapter(@NonNull FirebaseRecyclerOptions<model_catagories> options, Context context) {
         super(options);
         this.context = context;
+        setHasStableIds(true); // Enable stable IDs
     }
 
     @Override
@@ -46,6 +47,11 @@ public class CatagoriesAdapter extends FirebaseRecyclerAdapter<model_catagories,
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.single_catagories, parent, false);
         return new adapterViewHolder(v);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return getRef(position).getKey().hashCode(); // Return a unique ID based on the key
     }
 
     public static class adapterViewHolder extends RecyclerView.ViewHolder {

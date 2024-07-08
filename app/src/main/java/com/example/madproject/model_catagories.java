@@ -1,9 +1,11 @@
 package com.example.madproject;
 
+import java.util.ArrayList;
+
 public class model_catagories {
     private String imageUrl;
     private String category;
-
+    ArrayList<model_dishes> Dishes=new ArrayList<model_dishes>();
     public model_catagories() {
 
     }

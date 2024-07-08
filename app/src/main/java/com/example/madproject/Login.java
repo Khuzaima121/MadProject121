@@ -19,8 +19,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
 public class Login extends AppCompatActivity {
     TextInputEditText tietemail, tietpass;
     Button btnlogin;
@@ -104,7 +102,7 @@ public class Login extends AppCompatActivity {
     private void init() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+
         tietemail = findViewById(R.id.tietEmail);
         tietpass = findViewById(R.id.tietPass);
         btnlogin = findViewById(R.id.btnLogin);

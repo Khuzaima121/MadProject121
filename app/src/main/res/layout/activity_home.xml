@@ -1,27 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cvCard"
+<RelativeLayout android:id="@+id/cvCard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
     tools:context=".Home"
+    android:background="@color/semi_transparent"
     android:orientation="vertical"
-    android:gravity="center">
 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons_background"
+        android:drawableStart="@drawable/menu"
+        android:id="@+id/btnmenu"
+        android:text="@string/menu"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="160dp"
+            android:contentDescription="@string/todo"
+            android:padding="5dp"
+            android:src="@drawable/logo" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="95dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ctagories"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCatagories"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top Sellers"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTopSellings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:padding="4dp"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deals"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvdeals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            />
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/fab_color"
+        android:contentDescription="@string/cartbutton"
+        android:src="@drawable/icon_cart"
+        android:id="@+id/fabCart"
+        />
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/buttons_background"
-    android:id="@+id/btnsignout"
-    android:text="Sign out"
 
-    />
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="290dp"
+        android:layout_height="match_parent" />
+</RelativeLayout>
 
-</LinearLayout>

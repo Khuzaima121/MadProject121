@@ -11,14 +11,6 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,15 +28,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
-        btnsignin.setOnClickListener(v -> {
-            MoveToSigin();
-        });
-        btnlogin.setOnClickListener(v -> {
-            MoveToLogin();
-        });
-        tvSkip.setOnClickListener(v->{
-            MoveTOHome();
-        });
+        btnsignin.setOnClickListener(v -> MoveToSigin());
+        btnlogin.setOnClickListener(v -> MoveToLogin());
+        tvSkip.setOnClickListener(v-> MoveTOHome());
 
     }
     private  void MoveTOHome()
@@ -66,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+
 
         llvanim=findViewById(R.id.llAnimMain);
         Animation anim= AnimationUtils.loadAnimation(this,R.anim.logo_animation);
