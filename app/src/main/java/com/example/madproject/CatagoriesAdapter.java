@@ -22,7 +22,7 @@ public class CatagoriesAdapter extends FirebaseRecyclerAdapter<model_catagories,
     public CatagoriesAdapter(@NonNull FirebaseRecyclerOptions<model_catagories> options, Context context) {
         super(options);
         this.context = context;
-        setHasStableIds(true); // Enable stable IDs
+        setHasStableIds(true);
     }
 
     @Override

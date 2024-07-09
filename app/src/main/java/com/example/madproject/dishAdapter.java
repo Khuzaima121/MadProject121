@@ -2,6 +2,7 @@ package com.example.madproject;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,27 +32,63 @@ public class dishAdapter extends FirebaseRecyclerAdapter<model_dishes, dishAdapt
     DatabaseReference reference;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    Context context;
 
-    public dishAdapter(@NonNull FirebaseRecyclerOptions<model_dishes> options) {
+    public dishAdapter(@NonNull FirebaseRecyclerOptions<model_dishes> options, Context context) {
         super(options);
         reference = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        this.context=context;
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onBindViewHolder(@NonNull dishViewHolder holder, int i, @NonNull model_dishes modelDishes) {
+        String key=getRef(i).getKey();
 
         holder.dishName.setText(modelDishes.getName());
         holder.dishPrice.setText(modelDishes.getPrice());
         holder.dishDescription.setText(modelDishes.getDescription());
 
+
         Glide.with(holder.dishImage.getContext())
                 .load(modelDishes.getImageUrl())
                 .into(holder.dishImage);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.ivfav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String name= modelDishes.getName();
+                String Price=modelDishes.getPrice();
+                String Desc= modelDishes.getDescription();
+                String image= modelDishes.getImageUrl();
+                HashMap<String,Object> data=new HashMap<>();
+                data.put("name",name);
+                data.put("price",Price);
+                data.put("description",Desc);
+                data.put("imageUrl",image);
+
+                FirebaseDatabase.getInstance().getReference().child("Favourites").child(user.getUid())
+                        .push()
+                        .setValue(data)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(context, "Added to favourite", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+
+        holder.dishImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder order = new AlertDialog.Builder(v.getContext());
@@ -204,6 +241,7 @@ public class dishAdapter extends FirebaseRecyclerAdapter<model_dishes, dishAdapt
         TextView dishName;
         TextView dishPrice;
         TextView dishDescription;
+        ImageView ivfav;
 
         public dishViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -211,6 +249,7 @@ public class dishAdapter extends FirebaseRecyclerAdapter<model_dishes, dishAdapt
             dishDescription = itemView.findViewById(R.id.dish_description);
             dishPrice = itemView.findViewById(R.id.dish_price);
             dishName = itemView.findViewById(R.id.dish_name);
+            ivfav=itemView.findViewById(R.id.ivfav);
         }
     }
 }

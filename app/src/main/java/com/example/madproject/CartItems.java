@@ -112,7 +112,7 @@ public class CartItems extends AppCompatActivity {
         data.put("UserName", name);
         data.put("UserPhone", phone);
 
-        FirebaseDatabase.getInstance().getReference().child("Orders").child(user.getUid()).push()
+        FirebaseDatabase.getInstance().getReference().child("Orders").push()
                 .setValue(data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

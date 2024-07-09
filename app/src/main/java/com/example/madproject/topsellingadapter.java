@@ -1,5 +1,6 @@
 package com.example.madproject;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -45,11 +46,42 @@ public class topsellingadapter extends FirebaseRecyclerAdapter<model_topselling,
     protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull model_topselling model) {
         holder.tvDishprice.setText(model.getName());
         holder.tvdishname.setText(model.getPrice());
+        holder.tvDesc.setText(model.getDescription());
         Glide.with(holder.ivDishImage.getContext())
                 .load(model.getImageUrl())
                 .into(holder.ivDishImage);
+        holder.ivfav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                String name= model.getName();
+                String Price=model.getPrice();
+                String Desc= model.getDescription();
+                String image= model.getImageUrl();
+                HashMap<String,Object> data=new HashMap<>();
+                data.put("name",name);
+                data.put("price",Price);
+                data.put("description",Desc);
+                data.put("imageUrl",image);
+
+                FirebaseDatabase.getInstance().getReference().child("Favourites").child(user.getUid())
+                        .push()
+                        .setValue(data)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(context, "Added to favourite", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+        holder.ivDishImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder order = new AlertDialog.Builder(v.getContext());
@@ -110,8 +142,7 @@ public class topsellingadapter extends FirebaseRecyclerAdapter<model_topselling,
                                 data.put("DishName", DishName);
                                 data.put("Address", Address);
 
-                                // Adjusted to use reference from FirebaseRecyclerAdapter
-                                getRef(position).child("Orders")
+                                FirebaseDatabase.getInstance().getReference().child("Orders")
                                         .push()
                                         .setValue(data)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -142,7 +173,7 @@ public class topsellingadapter extends FirebaseRecyclerAdapter<model_topselling,
                         View view = LayoutInflater.from(v.getContext()).inflate(R.layout.quantity_layout, null, false);
                         add.setView(view);
                         add.setTitle("Add to cart");
-                        EditText etQuantity = view.findViewById(R.id.etQuantity);
+                    @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText etQuantity =view.findViewById(R.id.etQuantity);
                         add.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -203,12 +234,16 @@ public class topsellingadapter extends FirebaseRecyclerAdapter<model_topselling,
         ImageView ivDishImage;
         TextView tvdishname;
         TextView tvDishprice;
+        TextView tvDesc;
+        ImageView ivfav;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ivDishImage = itemView.findViewById(R.id.dish_image);
             tvdishname = itemView.findViewById(R.id.dish_name);
             tvDishprice = itemView.findViewById(R.id.dish_price);
+            tvDesc=itemView.findViewById(R.id.dish_description);
+            ivfav=itemView.findViewById(R.id.ivfav);
         }
     }
 }

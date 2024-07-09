@@ -64,21 +64,13 @@ public class splash extends AppCompatActivity {
     private void init() {
         tvslogan = findViewById(R.id.tvslogan);
         ivlogo = findViewById(R.id.ivlogo);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         Objects.requireNonNull(getSupportActionBar()).hide();
-        // Set animations
         Animation sloganAnim = AnimationUtils.loadAnimation(this, R.anim.slogan_animation);
         Animation logoAnim = AnimationUtils.loadAnimation(this, R.anim.logo_animation);
         ivlogo.setAnimation(logoAnim);
         tvslogan.setAnimation(sloganAnim);
-
-        // Full screen
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
-        // Hide action bar
-
-
-        // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
     }

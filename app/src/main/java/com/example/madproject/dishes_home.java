@@ -52,7 +52,7 @@ public class dishes_home extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<model_dishes>()
                         .setQuery(reference, model_dishes.class)
                         .build();
-        adapter = new dishAdapter(options );
+        adapter = new dishAdapter(options,this );
         recyclerView.setAdapter(adapter);
     }
 

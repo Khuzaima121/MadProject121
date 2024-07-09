@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout llvanim;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         llvanim=findViewById(R.id.llAnimMain);
         Animation anim= AnimationUtils.loadAnimation(this,R.anim.logo_animation);

@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class BarMenuFragment extends Fragment {
 
-    Button btnBack, btnSignOut, btnSettings,btnts;
+    Button btnBack, btnSignOut, btnSettings,btnts,fbtn,obtn;
 
 
     @Override
@@ -25,10 +25,19 @@ public class BarMenuFragment extends Fragment {
         btnSignOut = view.findViewById(R.id.btnsignout);
         btnSettings = view.findViewById(R.id.setbtn);
         btnts=view.findViewById(R.id.tsbtn);
+        fbtn=view.findViewById(R.id.fbtn);
+        obtn=view.findViewById(R.id.obtn);
 
 
-
-
+        obtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), RecentOrders.class));
+            }
+        });
+        fbtn.setOnClickListener(v->{
+            startActivity(new Intent(getActivity(), favourite.class));
+        });
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             btnSignOut.setText("Sign Up");
         }
