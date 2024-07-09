@@ -173,16 +173,17 @@ public class topsellingadapter extends FirebaseRecyclerAdapter<model_topselling,
                         View view = LayoutInflater.from(v.getContext()).inflate(R.layout.quantity_layout, null, false);
                         add.setView(view);
                         add.setTitle("Add to cart");
-                    @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText etQuantity =view.findViewById(R.id.etQuantity);
+                    EditText etQuantity =view.findViewById(R.id.etQuantitty);
                         add.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String Quantity = etQuantity.getText().toString().trim();
 
-                                if (Quantity.isEmpty() || Quantity.equals("0")) {
+                                if (Quantity.isEmpty()||Quantity.equals("0")) {
                                     Toast.makeText(view.getContext(), "Quantity taken as 1 ", Toast.LENGTH_SHORT).show();
-                                    Quantity = "1";
+                                    Quantity="1";
                                 }
+
 
                                 if (user == null) {
                                     Toast.makeText(view.getContext(), "Please login first", Toast.LENGTH_SHORT).show();

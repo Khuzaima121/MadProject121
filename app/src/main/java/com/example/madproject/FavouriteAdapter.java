@@ -123,7 +123,7 @@ public class FavouriteAdapter extends FirebaseRecyclerAdapter<model_favourites, 
         add.setTitle("Add to cart");
         View view = LayoutInflater.from(context).inflate(R.layout.quantity_layout, null, false);
         add.setView(view);
-        EditText etQuantity = view.findViewById(R.id.etQuantity);
+        EditText etQuantity = view.findViewById(R.id.etQuantitty);
         add.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
